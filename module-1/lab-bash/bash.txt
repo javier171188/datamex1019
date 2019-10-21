@@ -1,0 +1,20 @@
+echo "Hello World" # imprime "Hello Wolrd"
+mkdir new_dir #crea un directorio llamado new_dir
+rmdir new_dir #Elimina el directorio new_dir
+cp lorem/sed.txt lorem-copy #copia el archivo sed.txt en la carpeta lorem, a la carpeta lorem-copy
+ cp lorem/{at.txt,lorem.txt} lorem-copy #igual que la linea anterior, pero copie at.txt y lorem.text
+cat lorem/sed.txt # Muestra el contenido del archivo sed.text
+cat lorem/{at.txt,lorem.txt} #lo mismo pero para dos archivos
+head -3 lorem-copy/sed.txt #Muestra las primeras tres lineas del archivo sed.txt
+tail -3 lorem-copy/sed.txt #Muestra las últimas tres lineas del archivo sed.txt
+echo "Homo homini lupus." >> lorem-copy/sed.txt #agrega "Homo homini lupus" al final del archivo sed.text
+tail -3 lorem-copy/sed.txt #Muestra las primeras tres lineas del archivo sed.txt
+sed 's/et/ET/g' lorem/at.txt > lorem-copy/at.txt #Sustituye et por ET en lorem/at.txt a lorem-copy/at.txt
+whoami #me dice que usuario soy
+pwd #te dice donde estás en tus carpetas
+find lorem/ -name "*.txt" #lista los archivos .txt en la carpeta lorem
+cat lorem/sed.txt | wc -l #cuenta el número de líneas en el archivo sed.txt
+find . -iname "lorem.*" | wc -l #encuentra el número de archivos y carpetas que empiezan con lorem
+grep "et" lorem/at.txt #muestra las apariciones del texto et en el archivo at.txt
+grep -o -i et lorem/at.txt | wc -l #muestra el número de veces que aparece el texto et
+grep -o -i et lorem-copy/*.txt | wc -l #muestra el número de veces que aparece et en los archivos de la carpeta lorem-copy
