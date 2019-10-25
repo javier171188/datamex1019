@@ -21,7 +21,7 @@ Upon completion, add your deliverables to git. Then commit git and push your bra
 
 ## Resources
 
-[Python Classes](https://docs.python.org/3/tutorial/classes.html)
+[Python Classes](l)
 
 [Matrix Transpose](https://en.wikipedia.org/wiki/Transpose)
 
