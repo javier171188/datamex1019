@@ -74,7 +74,7 @@ class War:
             return Saxon.receiveDamage(Viking.attack)
         
         def saxonAttack(self):
-            Viking.receiveDamage( Saxon.attack)
+            Viking.receiveDamage(Saxon.attack) 
             if Saxon.health <= 0: 
                 self.vikingArmy.remove(Viking)
             return Viking.receiveDamage(Saxon.attack)
