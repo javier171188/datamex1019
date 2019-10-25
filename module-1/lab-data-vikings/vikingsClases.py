@@ -1,6 +1,6 @@
 
 # Soldier
-
+import random
 
 class Soldier:
     def __init__(self, health, strength):
@@ -74,10 +74,12 @@ class War:
             return Saxon.receiveDamage(Viking.attack)
         
         def saxonAttack(self):
-            Viking.receiveDamage(Saxon.attack) 
+            s = random.choice(self.saxonArmy)
+            v = random.choice(self.vikingArmy)
+            Viking.receiveDamage(s.attack) 
             if Saxon.health <= 0: 
                 self.vikingArmy.remove(Viking)
-            return Viking.receiveDamage(Saxon.attack)
+            return Viking.receiveDamage(s.attack)
         def showStatus(self):
             if saxonArmy == []:
                 return 'Vikings have won the war of the century!'
