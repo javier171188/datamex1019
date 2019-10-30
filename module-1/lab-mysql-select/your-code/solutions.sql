@@ -1,60 +1,40 @@
-select tabids.au_id as AUTHOR_ID,
-au_fname as FIRST_NAME,
-au_lname as LAST_NAME,
-titulos.title, publications.pub_name as PUBLISHER
-from (publications.authors  autores
-inner join publications.titleauthor tabids
-on  autores.au_id = tabids.au_id)
-left join publications.titles as titulos
-on tabids.title_id = titulos.title_id
-left join publications.publishers as publications
-on titulos.pub_id = publications.pub_id;
- 
- 
- create temporary table publications.ch1
- select tabids.au_id as AUTHOR_ID,
-au_fname as FIRST_NAME,	
-au_lname as LAST_NAME,
-titulos.title, publications.pub_name as PUBLISHER
-from (publications.authors  autores
-inner join publications.titleauthor tabids
-on  autores.au_id = tabids.au_id)
-left join publications.titles as titulos
-on tabids.title_id = titulos.title_id
-left join publications.publishers as publications
-on titulos.pub_id = publications.pub_id;
+#Challenge 1
+use publications
+select autores.au_id as AUTHOR_ID, au_lname as AUTHOR_LAST_NAME, au_fname as FIRST_NAME,
+titulos.title as TITLE, editoriales.pub_name as PUBLISHER
+from  authors as autores 
+inner join titleauthor as tituloautor
+on autores.au_id=tituloautor.au_id
+inner join titles as titulos
+on titulos.title_id = tituloautor.title_id
+inner join publishers as editoriales
+on editoriales.pub_id= titulos.pub_id;
+
+#Challenge 2
+create temporary table publications.cha2
+select autores.au_id as AUTHOR_ID, au_lname as AUTHOR_LAST_NAME, au_fname as FIRST_NAME,
+titulos.title as TITLE, editoriales.pub_name as PUBLISHER
+from  authors as autores 
+inner join titleauthor as tituloautor
+on autores.au_id=tituloautor.au_id
+inner join titles as titulos
+on titulos.title_id = tituloautor.title_id
+inner join publishers as editoriales
+on editoriales.pub_id= titulos.pub_id;
 
 
-select AUTHOR_ID,
-FIRST_NAME,	
- LAST_NAME,
-title as TITLE, PUBLISHER, count(title) as TITLE_COUNT
-from publications.ch1
-group by PUBLISHER, AUTHOR_ID;
+select *, count(*)
+from cha2
+group by AUTHOR_ID, PUBLISHER;
 
-create temporary table publications.ch2b
-select AUTHOR_ID,
-FIRST_NAME,	
- LAST_NAME,
-title as TITLE, PUBLISHER, count(title) as TITLE_COUNT
-from publications.ch1
-group by PUBLISHER, AUTHOR_ID;
-
-select AUTHOR_ID, LAST_NAME, FIRST_NAME,
-sum(TITLE_COUNT) as TOTAL
-from publications.ch2b
+#Challenge 3
+select AUTHOR_ID, AUTHOR_LAST_NAME, FIRST_NAME, count(*) as TOTAL
+from cha2
 group by AUTHOR_ID
-order by Total desc limit 3;
+order by TOTAL DESC limit 3;
 
-create temporary table publications.ch3
-select AUTHOR_ID, LAST_NAME, FIRST_NAME,
-sum(TITLE_COUNT) as TOTAL
-from publications.ch2b
+#CHALLENGE 4
+select AUTHOR_ID, AUTHOR_LAST_NAME, FIRST_NAME, count(*) as TOTAL
+from cha2
 group by AUTHOR_ID
-order by Total desc limit 3;
-
-select AUTHOR_ID, LAST_NAME, FIRST_NAME,
-sum(TITLE_COUNT) as TOTAL
-from publications.ch2b
-group by AUTHOR_ID
-order by Total desc;
+order by TOTAL DESC;
